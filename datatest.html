@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function datetest() {
+            var year = 2017;
+            var month = "July";
+            var day = 33;
+            var date = new Date(Date.parse("May 1, 2016"));
+            date.setYear(year);
+            date.setMonth(month);
+            date.setDate(day);
+            console.log(date);
+            console.log(window.location.href.split("?")[0]);
+            if(window.location.href.split("?")[1]){
+                console.log("yes");
+            }
+            else{
+                console.log("no");
+            }
+        }
+    </script>
+</head>
+<body onload="datetest()">
+
+</body>
+</html>

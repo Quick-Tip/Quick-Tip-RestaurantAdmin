@@ -1,0 +1,428 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="description" content="Flat, Clean, Responsive, admin template built with bootstrap 3">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+    <title>Cameo | Responsive Admin Dashboard</title>
+
+
+    <link rel="stylesheet" href="vendor/offline/theme.css">
+    <link rel="stylesheet" href="vendor/pace/theme.css">
+    <link rel="stylesheet" href="vendor/jvectormap/jquery-jvectormap-1.2.2.css">
+    <link rel="stylesheet" href="vendor/bxslider/jquery.bxslider.css">
+
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+
+    <link rel="stylesheet" href="css/panel.css">
+
+    <link rel="stylesheet" href="css/skins/palette.1.css" id="skin">
+    <!--<link rel="stylesheet" href="css/fonts/style.1.css" id="font">-->
+    <link rel="stylesheet" href="css/main.css">
+
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="vendor/modernizr.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+        function myinit() {
+            var token=localStorage.getItem("token");
+            console.log(token);
+            if(token==''){
+                console.log("tooken undefined");
+                window.location.href="login.html";
+            }
+            var info=localStorage.getItem("userInfo");
+            info=JSON.parse(info);
+            console.log(info);
+
+            $.ajax({
+                type: 'GET',
+                url: 'http://crcrcry.com.cn/user/relation',
+                data: {
+                    token: token,
+                },
+                dataType: 'JSON',
+                success: success,
+                error: error,
+            });
+
+            function success(data) {
+                console.log(data);
+                if(data.code==0){
+                    console.log("success");
+                    var num = data.data.employee.length;
+
+                    var waiternames = new Array(num);
+                    var waiterids = new Array(num);
+                    var waiternicknames = new Array(num);
+                    var waiteraveragerank = new Array(num);
+                    var waitertotaltips = new Array(num);
+                    var waitercommentnums = new Array(num);
+                    var shoptotaltips = 0;
+                    var shoptotalcomments = 0;
+                    var shoptotalstar = 0;
+
+
+                    for(var k =0; k<num; k++){
+
+                        waiternames[k] = data.data.employee[k].username;
+                        waiterids[k] = data.data.employee[k].uid;
+                        waiternicknames[k] = data.data.employee[k].nickname;
+                        waiteraveragerank[k] = data.data.employee[k].reward.starAvg;
+                        waitertotaltips[k] = data.data.employee[k].reward.moneySum;
+                        shoptotaltips += waitertotaltips[k];
+                        waitercommentnums[k] = data.data.employee[k].reward.numSum;
+                        shoptotalcomments += waitercommentnums[k];
+                        shoptotalstar += waiteraveragerank[k];
+                    }
+                    localStorage.setItem("shoptotalwaiters",num);
+                    var allwaiters = document.getElementById("allwaiters");
+                    for(var k =0; k<num; k++){
+                        allwaiters.innerHTML +=
+                                "<div class='col-md-6 col-sm-6 col-xs-12'>"+
+                                "<section class='panel no-border overflow-hidden widget-social'>"+
+                                "<div class='panel-body bg-white'>"+
+                                "<a href='javascript:;'' class='pull-left mg-r-md'>"+
+                                "<img src='img/waiter.jpg' class='avatar avatar-md img-circle' alt=''>"+
+                                "</a>"+
+                                "<div>" +
+                                waiternames[k]+
+                                "<a href='javascript:;' class='pull-right pd-sm toggle-sidebar' >"+
+                                "<span class='badge bg-danger animated flash' onclick='showwaiterinfo(" +
+                                waiterids[k] +
+                                ")'>详情</span>"+
+                                "</a>"+
+
+
+                                "</div>"+
+                                "<small>员工编号:" +
+                                waiterids[k]+
+                                "</small>"+
+                                "<br>"+
+                                "<small>员工昵称:\n" +
+                                        waiternicknames[k]+
+                                "</small>"+
+                                "</div>"+
+                                "<div class='panel-footer no-padding no-border'>"+
+                                "<div class='row no-margin'>"+
+                                "<div class='col-xs-4 bg-primary pd-md text-center'>"+
+                                "<a>"+
+                                "<span class='fa fa-star mg-b-xs show'></span> " +
+                                (''+waiteraveragerank[k]).substr(0,4)+
+                                "</a>"+
+                                "</div>"+
+                                "<div class='col-xs-4 bg-warning pd-md text-center'>"+
+                                "<a>"+
+                                "<span class='fa fa-ticket mg-b-xs show'></span> " +
+                                waitertotaltips[k]+
+                                "</a>"+
+                                "</div>"+
+                                "<div class='col-xs-4 bg-info pd-md text-center'>"+
+                                "<a href='javascript:;'>"+
+                                "<span class='fa fa-times mg-b-xs show' onclick='deletewaiter(\"" +
+                                waiternames[k] +
+                                "\")'></span><a onclick='deletewaiter(\"" +
+                                waiternames[k] +
+                                "\")'>删除员工</a>"+
+                                "</a>"+
+                                "</div>"+
+                                "</div>"+
+                                "</div>"+
+                                "</section>"+
+                                "</div>"
+                    }
+                    var recenttips = localStorage.getItem("recenttips");
+                    var topname = document.getElementById("topname");
+                    topname.innerHTML = info.nickname;
+                    var restaurantname = document.getElementById("welcomewords");
+                    restaurantname.innerHTML="welcome "+info.nickname;
+                    var totalcomments = document.getElementById("totalcomments");
+                    totalcomments.innerHTML = shoptotalcomments;
+                    var totaltips = document.getElementById("totaltips");
+                    totaltips.innerHTML = shoptotaltips;
+                    var totalmembers = document.getElementById("totalmembers");
+                    totalmembers.innerHTML = num;
+                    var todaytips=document.getElementById("todaytips");
+                    todaytips.innerHTML=recenttips;
+                    var avestar = document.getElementById("avestar");
+                    avestar.innerHTML = (""+shoptotalstar/num).substr(0,4);
+                }
+            }
+            function error(data) {
+                console.log(data);
+                console.log("error");
+
+            }
+
+
+        }
+        function showwaiterinfo(waiterid) {
+            window.location.href="waiterinfo.html?waiterid="+waiterid;
+        }
+        function addwaiter() {
+            window.location.href="addwaiter.html";
+        }
+        function deletewaiter(waitername) {
+            console.log(waitername);
+            var token=localStorage.getItem("token");
+            console.log(token);
+            $.ajaxSetup({
+                headers:{
+                    'access-token':token
+                }
+            });
+            $.ajax({
+                type: 'DELETE',
+                url: 'http://crcrcry.com.cn/user/relation',
+                data: {
+                    employee: waitername,
+                },
+                dataType: 'JSON',
+                success: success,
+                error: error,
+            });
+            function success(data) {
+                console.log(data);
+                if(data.code==0){
+                    console.log("success");
+                    window.location.reload();
+                }
+
+            }
+            function error(data) {
+                console.log(data);
+                console.log("error");
+            }
+
+        }
+        function searchwaiter(e,searchedwaiter){
+            e.preventDefault();
+            searchedwaiter=searchedwaiter.value;
+            console.log(searchedwaiter);
+
+            var token=localStorage.getItem("token");
+            console.log(token);
+            var info=localStorage.getItem("userInfo");
+            info=JSON.parse(info);
+
+            $.ajax({
+                type: 'GET',
+                url: 'http://crcrcry.com.cn/user/relation',
+                data: {
+                    token: token,
+                },
+                dataType: 'JSON',
+                success: success,
+                error: error,
+            });
+            function success(data) {
+                if(data.code==0){
+                    var num = data.data.employee.length;
+
+                    console.log("success");
+                    for(var k=0;k<num;k++){
+                        if(searchedwaiter==data.data.employee[k].username){
+                            window.location.href="waiterinfo.html?waiterid=" +data.data.employee[k].uid;
+                            return;
+                        }
+                    }
+                    alert("查无此人");
+                }
+            }
+            function error(data) {
+                console.log("error");
+            }
+        }
+        function exit() {
+            localStorage["token"] = '';
+            localStorage["userInfo"] = null;
+            localStorage["recenttips"] = 0;
+            localStorage["shoptotalwaiters"] = 0;
+            localStorage["totaltables"] = 0;
+            window.location.href="login.html";
+        }
+    </script>
+</head>
+
+<body onload="myinit()">
+
+<div class="app" data-sidebar="locked">
+
+    <header class="header header-fixed navbar">
+        <div class="brand">
+            <a href="javascript:;" class="fa fa-bars off-left visible-xs" ></a>
+            <a href="index.html" class="navbar-brand">
+                <i class="fa fa-stop mg-r-sm"></i>
+                <span class="heading-font">
+TipGo<b>ADMIN</b>
+</span>
+            </a>
+        </div>
+        <form class="navbar-form navbar-left hidden-xs" role="search">
+            <div class="form-group">
+                <button class="btn no-border no-margin bg-none no-pd-l" type="submit" onclick="searchwaiter(event,searchedwaiter)">
+                    <i class="fa fa-search"></i>
+                </button>
+                <input type="text" name="searchedwaiter" class="form-control no-border no-padding search" placeholder="输入您要查看的员工账号">
+            </div>
+        </form>
+        <ul class="nav navbar-nav navbar-right off-right">
+            <li class="hidden-xs">
+                <a href="javascript:;" id="topname">
+                    香格里拉大酒店
+                </a>
+            </li>
+
+            <li >
+                <a>
+                    <img src="img/restaurant.jpg" class="avatar pull-left img-circle" alt="user" title="user">
+
+                </a>
+
+            </li>
+        </ul>
+    </header>
+
+    <section class="layout">
+
+        <aside class="sidebar canvas-left">
+
+            <nav class="main-navigation">
+                <ul>
+                    <li class="active">
+                        <a href="index.html">
+                            <i class="fa fa-male"></i>
+                            <span>服务员管理</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="TableManager.html">
+                            <i class="fa fa-coffee"></i>
+                            <span>餐桌管理</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="AllTips.html">
+                            <div class="badge bg-none pull-right" id="todaytips">8</div>
+                            <i class="fa fa-envelope"></i>
+                            <span>所有打赏</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="changepassword.html">
+                            <i class="fa fa-file-text"></i>
+                            <span>修改密码</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="exit()">
+                            <i class="fa fa-info"></i>
+                            <span>登出</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+
+        </aside>
+
+
+
+
+
+        <section class="main-content">
+
+            <div class="content-wrap">
+                <div class="row mg-b">
+                    <div class="col-xs-6">
+                        <h3 class="no-margin">TipGo餐厅管理系统</h3>
+                        <small id="welcomewords">Welcome back, GoTip</small>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <a href="javascript:;" class="fa fa-flash pull-right pd-sm toggle-sidebar" >
+                            <span class="badge bg-danger animated flash" onclick="addwaiter()">添加员工</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div class="circle-icon bg-success">
+                                    <i class="fa fa-comments"></i>
+                                </div>
+                                <div>
+                                    <h3 class="no-margin" id="totalcomments">0</h3> 累计评价
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div class="circle-icon bg-danger">
+                                    <i class="fa fa-anchor"></i>
+                                </div>
+                                <div>
+                                    <h3 class="no-margin" id="totaltips">0</h3> 累计打赏
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div class="circle-icon bg-info">
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div>
+                                    <h3 class="no-margin" id="avestar">0</h3> 平均评级
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div class="circle-icon bg-default">
+                                    <i class="fa fa-male"></i>
+                                </div>
+                                <div>
+                                    <h3 class="no-margin" id="totalmembers">0</h3> 员工数量
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row" id="allwaiters">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+    </section>
+</div>
+
+</body>
+
+</html>

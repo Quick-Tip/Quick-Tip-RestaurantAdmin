@@ -1,0 +1,464 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="description" content="Flat, Clean, Responsive, admin template built with bootstrap 3">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+    <title>Cameo | Responsive Admin Dashboard</title>
+
+    <script type="text/javascript">
+
+    </script>
+    <link rel="stylesheet" href="vendor/offline/theme.css">
+    <link rel="stylesheet" href="vendor/pace/theme.css">
+    <link rel="stylesheet" href="vendor/jvectormap/jquery-jvectormap-1.2.2.css">
+    <link rel="stylesheet" href="vendor/bxslider/jquery.bxslider.css">
+
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+
+    <link rel="stylesheet" href="css/panel.css">
+
+
+    <link rel="stylesheet" href="css/skins/palette.1.css" id="skin">
+    <link rel="stylesheet" href="css/main.css">
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+        function myinit() {
+            var token=localStorage.getItem("token");
+            var info=localStorage.getItem("userInfo");
+            info=JSON.parse(info);
+            if(window.location.href.split("?")[1]){
+                var starttime = window.location.href.split("=")[1];
+                starttime = starttime.split("&")[0];
+                var endtime = window.location.href.split("=")[2];
+                endtime = endtime.split("&")[0];
+                var startDate = new Date();
+                var endDate = new Date();
+                startDate.setTime(starttime*1000);
+                endDate.setTime(endtime*1000);
+
+                startDate = startDate.toLocaleDateString();
+                endDate.setDate(endDate.getDate()+1);
+                endDate = endDate.toLocaleDateString();
+                $.ajax({
+                    type: 'GET',
+                    url: "http://crcrcry.com.cn/reward?waiter=&start="+ startDate +"&end=" + endDate,
+                    data: {
+                        token: token,
+                    },
+                    dataType: 'JSON',
+                    success: success,
+                    error: error,
+                });
+            }
+            else{
+                $.ajax({
+                    type: 'GET',
+                    url: "http://crcrcry.com.cn/reward?waiter=&start=&end=",
+                    data: {
+                        token: token,
+                    },
+                    dataType: 'JSON',
+                    success: success,
+                    error: error,
+                });
+            }
+
+
+
+            function success(data) {
+                console.log(data);
+
+
+                if(data.code==0){
+                    var num = data.data.rewardList.length;
+                    var customernames = new Array(num);
+                    var commenttimes = new Array(num);
+                    var waiternames = new Array(num);
+                    var waiterranks = new Array(num);
+                    var customertips = new Array(num);
+                    var comments = new Array(num);
+                    var commentcompletetimes = new Array(num);
+                    var alltotaltips=0;
+                    for(var k =0; k<num; k++){
+                        customernames[k] = data.data.rewardList[k].setterNickname;
+                        commenttimes[k] = data.data.rewardList[k].dayTime;
+                        waiternames[k] = data.data.rewardList[k].getterNickname;
+                        waiterranks[k] = data.data.rewardList[k].star;
+                        customertips[k] = data.data.rewardList[k].money;
+                        comments[k] = data.data.rewardList[k].comment;
+                        commentcompletetimes[k] = data.data.rewardList[k].time;
+                        alltotaltips+=customertips[k];
+                    }
+                    var waiters = document.getElementById("waiters");
+                    var recenttips = 0;
+                    for(var k =0; k<num; k++){
+                        var briefcomments;
+                        if(comments[k].length>40){
+                            briefcomments = comments[k].substring(0,40) + "...<br />";
+                        }
+                        else if(comments[k].length<20){
+                            briefcomments = comments[k] + "<br /><br />";
+                        }
+                        if(istoday(commentcompletetimes[k])){
+                            recenttips+=1;
+                            waiters.innerHTML += "<div class='col-md-3 col-sm-6 col-xs-12'>" +
+                                    "<section class='panel position-relative'>" +
+                                    "<div class='ribbon ribbon-danger'>" +
+                                    "<div class='banner'> " +
+                                    "<div class='text'>New Tips</div>" +
+                                    "</div>" +
+                                    "</div>" +
+                                    "<div class='panel-body'>" +
+                                    "<a href='javascript:;' class='pull-left mg-r-md'>"+
+                                    "<img src='img/waiter.jpg' class='avatar avatar-sm img-circle' alt=''>"+
+                                    "</a>"+
+                                    "<div>" +
+                                    customernames[k] +
+                                    "</div>" +
+                                    "<small>" +
+                                    commenttimes[k] +
+                                    "</small>"+
+                                    "<p class='mg-t-xs'>"+
+                                    "<span class='label label-primary'>" +
+                                    waiternames[k] +
+                                    "</span>"+
+                                    "<span class='label label-info'>" +
+                                    waiterranks[k] +
+                                    "</span>"+
+                                    "<span class='label label-danger'>" +
+                                    customertips[k] +
+                                    "</span>"+
+                                    "</p> <small>"+
+                                    "<i class='fa fa-circle text-primary mg-r-xs'></i>" +
+                                    briefcomments +
+                                    "<a onclick='showmodel(\`" +
+                                    comments[k]+
+                                    "\`)'>完整评论</a>"+
+                                    "</small>"+
+                                    "<p class='mg-xs'></p>"+
+                                    "</div>"+
+                                    "</section>"+
+                                    "</div>";
+                        }
+
+                        else
+                    {
+                        waiters.innerHTML += "<div class='col-md-3 col-sm-6 col-xs-12'>" +
+                                "<section class='panel position-relative'>" +
+                                "<div class='ribbon ribbon-danger'>" +
+
+                                "</div>" +
+                                "<div class='panel-body'>" +
+                                "<a href='javascript:;' class='pull-left mg-r-md'>" +
+                                "<img src='img/waiter.jpg' class='avatar avatar-sm img-circle' alt=''>" +
+                                "</a>" +
+                                "<div>" +
+                                customernames[k] +
+                                "</div>" +
+                                "<small>" +
+                                commenttimes[k] +
+                                "</small>" +
+                                "<p class='mg-t-xs'>" +
+                                "<span class='label label-primary'>" +
+                                waiternames[k] +
+                                "</span>" +
+                                "<span class='label label-info'>" +
+                                waiterranks[k] +
+                                "</span>" +
+                                "<span class='label label-danger'>" +
+                                customertips[k] +
+                                "</span>" +
+                                "</p> <small>" +
+                                "<i class='fa fa-circle text-primary mg-r-xs'></i>" +
+                                briefcomments +
+                                "<a onclick='showmodel(\`" +
+                                comments[k]+
+                                "\`)'>完整评论</a>"+
+                                "</small>"+
+                                "<p class='mg-xs'></p>"+
+                                "</div>"+
+                                "</section>"+
+                                "</div>";
+                    }
+                    }
+                    if(!window.location.href.split("?")[1]){
+                    localStorage.setItem("recenttips",recenttips);
+                        }
+                        recenttips = localStorage.getItem("recenttips");
+                    var shoptotalwaiters=localStorage.getItem("shoptotalwaiters");
+                    shoptotalwaiters=JSON.parse(shoptotalwaiters);
+                    var shoptotaltables = localStorage.getItem("totaltables");
+                    shoptotaltables=JSON.parse(shoptotaltables);
+                    var topname = document.getElementById("topname");
+                    topname.innerHTML = info.nickname;
+                    var restaurantname = document.getElementById("welcomewords");
+                    restaurantname.innerHTML="welcome "+info.nickname;
+                    var totalcomments = document.getElementById("totalcomments");
+                    totalcomments.innerHTML = num;
+                    var totaltips = document.getElementById("totaltips");
+                    totaltips.innerHTML = alltotaltips;
+                    var todaytips=document.getElementById("todaytips");
+                    todaytips.innerHTML=recenttips;
+                    var totalmembers = document.getElementById("totalmembers");
+                    totalmembers.innerHTML = shoptotalwaiters;
+                    var totaltables = document.getElementById("totaltables");
+                    totaltables.innerHTML = shoptotaltables;
+                }
+            }
+            function error(data) {
+                console.log(data);
+            }
+
+
+
+
+
+
+        }
+
+        function istoday(tipdate){
+            tipdate = new Date(tipdate);
+            var today = new Date();
+
+            var t=today.getTime()-1000*60*60*24;
+            var yesterday=new Date(t);
+
+            if(tipdate>yesterday){
+                return true;
+            }
+            else{
+                return false;
+            }
+
+        }
+        function showmodel(comment) {
+            var completecomment = document.getElementById("completecomment");
+            completecomment.innerHTML = comment;
+            $('#myModal').modal('toggle');
+        }
+        function exit() {
+            localStorage["token"] = '';
+            localStorage["userInfo"] = null;
+            localStorage["recenttips"] = 0;
+            localStorage["shoptotalwaiters"] = 0;
+            localStorage["totaltables"] = 0;
+
+            window.location.href="login.html";
+        }
+    </script>
+
+
+</head>
+
+<body onload="myinit()">
+
+<div class="app" data-sidebar="locked">
+
+    <header class="header header-fixed navbar">
+        <div class="brand">
+            <a href="javascript:;" class="fa fa-bars off-left visible-xs" data-toggle="off-canvas" data-move="ltr"></a>
+            <a href="index.html" class="navbar-brand">
+                <i class="fa fa-stop mg-r-sm"></i>
+                <span class="heading-font">
+                    TipGo<b>ADMIN</b>
+                </span>
+            </a>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right off-right">
+            <li class="hidden-xs">
+                <a href="javascript:;" id="topname">
+                    香格里拉大酒店
+                </a>
+            </li>
+
+            <li class="quickmenu">
+                <a href="javascript:;" data-toggle="dropdown">
+                    <img src="img/restaurant.jpg" class="avatar pull-left img-circle" alt="user" title="user">
+                </a>
+            </li>
+        </ul>
+    </header>
+
+    <section class="layout">
+
+        <aside class="sidebar canvas-left">
+
+            <nav class="main-navigation">
+                <ul>
+                    <li>
+                        <a href="index.html">
+                            <i class="fa fa-male"></i>
+                            <span>服务员管理</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="TableManager.html">
+                            <i class="fa fa-coffee"></i>
+                            <span>餐桌管理</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="AllTips.html">
+                            <div class="badge bg-none pull-right" id="todaytips">0</div>
+                            <i class="fa fa-envelope"></i>
+                            <span>所有打赏</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="changepassword.html">
+                            <i class="fa fa-file-text"></i>
+                            <span>修改密码</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="exit()">
+                            <i class="fa fa-info"></i>
+                            <span>登出</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </aside>
+
+
+
+
+
+        <section class="main-content">
+
+            <div class="content-wrap">
+                <div class="row mg-b">
+                    <div class="col-xs-6">
+                        <h3 class="no-margin">GoTip餐厅管理系统</h3>
+                        <small id="welcomewords">Welcome back, Gary Stone</small>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <a href="datepicker.html" class="fa fa-flash pull-right pd-sm toggle-sidebar" data-toggle="off-canvas" data-move="rtl">
+                            <span class="badge bg-danger animated flash" >时间选择器</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div class="circle-icon bg-success">
+                                    <i class="fa fa-comments"></i>
+                                </div>
+                                <div>
+                                    <h3 class="no-margin" id="totalcomments">0</h3> 累计评价
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div class="circle-icon bg-danger">
+                                    <i class="fa fa-anchor"></i>
+                                </div>
+                                <div>
+                                    <h3 class="no-margin" id="totaltips">0</h3> 累计打赏
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div class="circle-icon bg-default">
+                                    <i class="fa fa-male"></i>
+                                </div>
+                                <div>
+                                    <h3 class="no-margin" id="totalmembers">0</h3> 员工数量
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div class="circle-icon bg-info">
+                                    <i class="fa fa-table"></i>
+                                </div>
+                                <div>
+                                    <h3 class="no-margin" id="totaltables">0</h3> 餐桌数量
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="row">
+
+                        <div class="row" id="waiters">
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+    </section>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">完整评论</h4>
+            </div>
+            <div class="modal-body" id="completecomment">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2">完整评论</h4>
+            </div>
+            <div class="modal-body" id="completecomment2">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

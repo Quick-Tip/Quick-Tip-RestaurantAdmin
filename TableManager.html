@@ -1,0 +1,306 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="description" content="Flat, Clean, Responsive, admin template built with bootstrap 3">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+    <title>Cameo | Responsive Admin Dashboard</title>
+
+
+    <link rel="stylesheet" href="vendor/offline/theme.css">
+    <link rel="stylesheet" href="vendor/pace/theme.css">
+    <link rel="stylesheet" href="vendor/jvectormap/jquery-jvectormap-1.2.2.css">
+    <link rel="stylesheet" href="vendor/bxslider/jquery.bxslider.css">
+
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+
+    <link rel="stylesheet" href="css/panel.css">
+
+    <link rel="stylesheet" href="css/skins/palette.1.css" id="skin">
+    <link rel="stylesheet" href="css/main.css">
+
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="vendor/modernizr.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+        function myinit() {
+            var token=localStorage.getItem("token");
+            var info=localStorage.getItem("userInfo");
+            info=JSON.parse(info);
+            $.ajax({
+                type: 'GET',
+                url: 'http://crcrcry.com.cn/nfc',
+                headers: {
+                    "access-token": token,
+                },
+                data: {
+
+                },
+                dataType: 'JSON',
+                success: success,
+                error: error,
+            });
+            function success(data) {
+                console.log(data);
+                if(data.code==0){
+                    console.log("success");
+
+
+                    var num = data.data.nfc.length;
+                    var tableids = new Array(num);
+                    var deviceids = new Array(num);
+                    var devicenotes = new Array(num);
+                    var waiterids = new Array(num);
+                    var waiternicknames = new Array(num);
+
+
+                    for(var k =0; k<num; k++){
+
+                        tableids[k] = data.data.nfc[k].desktop_id;
+                        deviceids[k] = data.data.nfc[k].id;
+                        devicenotes[k] = data.data.nfc[k].data;
+                        waiterids[k] = data.data.nfc[k].waiter_id;
+                        waiternicknames[k] = data.data.nfc[k].nickname;
+                    }
+                    var alltables = document.getElementById("alltables");
+                    for(var k =0; k<num; k++){
+
+                        alltables.innerHTML +=
+                                "<div class='col-md-6 col-sm-6 col-xs-12'>"+
+                                "<section class='panel panel-primary'>"+
+                                "<div class='panel-heading'>" +
+                                "餐桌号:"+
+                                tableids[k]+
+//                                "<span class='badge bg-danger animated flash pull-right' onclick='deletetable(" +
+//                                tableids[k] +
+//                                ")'>删除</span>"+
+                                "</div>"+
+                                "<ul class='list-group'>"+
+                                "<li class='list-group-item'>"+
+                                "<span class='pull-left mg-t-xs mg-r-md'>"+
+                                "<img src='img/NFC-F.png' class='avatar avatar-sm img-circle' alt=''>"+
+                                "</span>"+
+                                "<div class='show no-margin pd-t-xs'>"+
+                                "设备号: "+
+                                deviceids[k]+
+//                                "<span class='badge bg-danger animated flash pull-right' onclick='changedevice(" +
+//                                tableids[k] +
+//                                ")'>更换设备</span>"+
+                                "</div>"+
+                                "<small class='text-muted'>" +
+                                devicenotes[k] +
+                                "</small>"+
+                                "</li>"+
+                                "<li class='list-group-item'>"+
+                                "<span class='pull-left mg-t-xs mg-r-md'>"+
+                                "<img src='img/waiter.jpg' class='avatar avatar-sm img-circle' alt=''>"+
+                                "</span>"+
+                                "<div class='show no-margin pd-t-xs'>"+
+                                "员工编号: "+
+                                waiterids[k] +
+                                "</div>"+
+                                "<small class='text-muted'>" +
+                                waiternicknames[k] +
+                                "</small>"+
+                                "</li> " +
+                                "</ul> " +
+                                "</section>"+
+                                "</div>"
+
+                    }
+                    localStorage.setItem("totaltables",num);
+                    var shoptotalwaiters=localStorage.getItem("shoptotalwaiters");
+                    shoptotalwaiters=JSON.parse(shoptotalwaiters);
+                    var recenttips = localStorage.getItem("recenttips");
+                    var topname = document.getElementById("topname");
+                    topname.innerHTML = info.nickname;
+                    var welcomewords = document.getElementById("welcomewords");
+                    welcomewords.innerHTML="welcome "+info.nickname;
+                    var totalmembers = document.getElementById("totalmembers");
+                    totalmembers.innerHTML = shoptotalwaiters;
+                    var totaltables = document.getElementById("totaltables");
+                    totaltables.innerHTML = num;
+                    var todaytips=document.getElementById("todaytips");
+                    todaytips.innerHTML=recenttips;
+                }
+            }
+            function error(data) {
+                console.log(data);
+                console.log("error");
+            }
+
+
+
+
+
+
+        }
+//        function deletetable(tableid) {
+//            alert(tableid);
+//        }
+//        function changedevice(tableid) {
+//            alert(tableid);
+//        }
+        function addtable() {
+            window.location.href="addtable.html";
+        }
+        function exit() {
+            localStorage["token"] = '';
+            localStorage["userInfo"] = null;
+            localStorage["recenttips"] = 0;
+            localStorage["shoptotalwaiters"] = 0;
+            localStorage["totaltables"] = 0;
+            window.location.href="login.html";
+        }
+    </script>
+</head>
+
+<body onload="myinit()">
+
+<div class="app" data-sidebar="locked">
+
+    <header class="header header-fixed navbar">
+        <div class="brand">
+            <a href="javascript:;" class="fa fa-bars off-left visible-xs" data-toggle="off-canvas" data-move="ltr"></a>
+            <a href="index.html" class="navbar-brand">
+                <i class="fa fa-stop mg-r-sm"></i>
+                <span class="heading-font">
+TipGo<b>ADMIN</b>
+</span>
+            </a>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right off-right">
+            <li class="hidden-xs">
+                <a href="javascript:;" id="topname">
+                    +Gerald Theodore Morris
+                </a>
+            </li>
+
+            <li class="quickmenu">
+                <a href="javascript:;" data-toggle="dropdown">
+                    <img src="img/restaurant.jpg" class="avatar pull-left img-circle" alt="user" title="user">
+                </a>
+            </li>
+        </ul>
+    </header>
+
+    <section class="layout">
+
+        <aside class="sidebar canvas-left">
+
+            <nav class="main-navigation">
+                <ul>
+                    <li>
+                        <a href="index.html">
+                            <i class="fa fa-male"></i>
+                            <span>服务员管理</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="TableManager.html">
+                            <i class="fa fa-coffee"></i>
+                            <span>餐桌管理</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="AllTips.html">
+                            <div class="badge bg-none pull-right" id="todaytips">8</div>
+                            <i class="fa fa-envelope"></i>
+                            <span>所有打赏</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="changepassword.html">
+                            <i class="fa fa-file-text"></i>
+                            <span>修改密码</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="exit()">
+                            <i class="fa fa-info"></i>
+                            <span>登出</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+
+        </aside>
+
+
+
+
+
+        <section class="main-content">
+
+            <div class="content-wrap">
+                <div class="row mg-b">
+                    <div class="col-xs-6">
+                        <h3 class="no-margin">TipGo餐厅管理系统</h3>
+                        <small id="welcomewords">Welcome back, Gary Stone</small>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <a href="javascript:;" class="fa fa-flash pull-right pd-sm toggle-sidebar" data-toggle="off-canvas" data-move="rtl">
+                            <span class="badge bg-danger animated flash" onclick="addtable()">添加餐桌</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div class="circle-icon bg-default">
+                                    <i class="fa fa-male"></i>
+                                </div>
+                                <div>
+                                    <h3 class="no-margin" id="totalmembers">3,823</h3> 员工数量
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div class="circle-icon bg-info">
+                                    <i class="fa fa-table"></i>
+                                </div>
+                                <div>
+                                    <h3 class="no-margin" id="totaltables">3,823</h3> 餐桌数量
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row" id="alltables">
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+    </section>
+</div>
+
+</body>
+
+</html>

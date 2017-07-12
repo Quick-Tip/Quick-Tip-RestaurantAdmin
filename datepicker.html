@@ -1,0 +1,114 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="description" content="Flat, Clean, Responsive, admin template built with bootstrap 3">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+    <title>Cameo | Responsive Admin Dashboard</title>
+
+
+    <link rel="stylesheet" href="vendor/offline/theme.css">
+    <link rel="stylesheet" href="vendor/pace/theme.css">
+    <link rel="stylesheet" href="vendor/jvectormap/jquery-jvectormap-1.2.2.css">
+    <link rel="stylesheet" href="vendor/bxslider/jquery.bxslider.css">
+
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+
+    <link rel="stylesheet" href="css/panel.css">
+
+    <link rel="stylesheet" href="css/skins/palette.1.css" id="skin">
+    <link rel="stylesheet" href="css/main.css">
+
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="vendor/modernizr.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="./bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <script>
+        function datepick() {
+            var starttime = document.getElementById("starttime");
+            var endtime = document.getElementById("endtime");
+            starttime = starttime.value;
+            endtime = endtime.value;
+
+            var starttimestamp = Date.parse(new Date(starttime));
+            var endtimestamp = Date.parse(new Date(endtime));
+            starttimestamp = starttimestamp/1000;
+            endtimestamp = endtimestamp/1000;
+
+            window.location.href = "Alltips.html?starttime="+starttimestamp+"&endtime="+endtimestamp;
+
+        }
+    </script>
+</head>
+
+<body class="bg-color center-wrapper">
+<div class="center-content">
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+            <section class="panel panel-default">
+                <header class="panel-heading">日期筛选器</header>
+                <div class="control-group bg-white user pd-md">
+                    <strong>请选择查询的开始时间.</strong>
+                    <div class="controls input-append date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input size="16" type="text" value="" class="form-control mg-b-sm" readonly id="starttime">
+                        <span class="add-on"><i class="icon-remove"></i></span>
+                        <span class="add-on"><i class="icon-th"></i></span>
+                    </div>
+                    <input type="hidden" id="dtp_input2" value="" /><br/>
+                </div>
+                <div class="control-group bg-white user pd-md">
+                    <strong>请选择查询的结束时间.</strong>
+                    <div class="controls input-append date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input size="16" type="text" value="" class="form-control mg-b-sm" readonly id="endtime">
+                        <span class="add-on"><i class="icon-remove"></i></span>
+                        <span class="add-on"><i class="icon-th"></i></span>
+                    </div>
+                    <input type="hidden" id="dtp_input2" value="" /><br/>
+                </div>
+                <div class="bg-white user pd-md">
+                        <button class="btn btn-info btn-block" type="submit" onclick="datepick()">确定</button>
+
+                    <p class="center-block mg-t mg-b text-right">查看所有记录?
+                        <a href="AllTips.html">点击返回.</a>
+                    </p>
+
+                </div>
+
+            </section>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="./bootstrap/jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="./bootstrap/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+
+    $('.form_date').datetimepicker({
+        language:  'en',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="description" content="Flat, Clean, Responsive, admin template built with bootstrap 3">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+    <title>Cameo | Responsive Admin Dashboard</title>
+
+
+    <link rel="stylesheet" href="vendor/offline/theme.css">
+    <link rel="stylesheet" href="vendor/pace/theme.css">
+    <link rel="stylesheet" href="vendor/jvectormap/jquery-jvectormap-1.2.2.css">
+    <link rel="stylesheet" href="vendor/bxslider/jquery.bxslider.css">
+
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+
+    <link rel="stylesheet" href="css/panel.css">
+
+    <link rel="stylesheet" href="css/skins/palette.1.css" id="skin">
+    <link rel="stylesheet" href="css/main.css">
+
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="vendor/modernizr.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+        function sign(e,userid,restaurantname,password,passwordconfirm) {
+            e.preventDefault();
+            userid=userid.value;
+            restaurantname=restaurantname.value;
+            password=password.value;
+            passwordconfirm=passwordconfirm.value;
+            console.log(userid);
+            console.log(userid.length);
+            if ((userid.length == 0) || (restaurantname.length == 0)|| (password.length == 0)|| (passwordconfirm.length == 0)) {
+                alert("信息填写不完整");
+                return;
+            }
+
+
+            if (userid.length <= 6) {
+                alert("用户名过短");
+                return;
+
+            }
+            if (password.length <= 6) {
+                alert("密码过短");
+                return;
+
+            }
+            if (passwordconfirm != password){
+                alert("密码验证错误");
+                return;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://crcrcry.com.cn/user/register',
+                data: {
+                    username: userid,
+                    password: password,
+                    verify: passwordconfirm,
+                    nickname: restaurantname,
+                    user_type: '2',
+                },
+                dataType: 'JSON',
+                success: success,
+                error: error,
+            });
+            function success(data) {
+                console.log(data);
+                if(data.code==0){
+                    localStorage.setItem("token",data.data.token);
+                    localStorage.setItem("userInfo",JSON.stringify(data.data.userInfo));
+                    showmodel(2);
+                }
+                else{
+                    showmodel(1);
+                }
+                console.log("success");
+            }
+            function error(data) {
+                console.log(data);
+                console.log("errot");
+            }
+
+        }
+        function showmodel(flag) {
+            if(flag==1){
+                $('#myModal1').modal('toggle');
+            }
+            else {
+                $('#myModal2').modal('toggle');
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-color center-wrapper">
+<div class="center-content">
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+            <section class="panel panel-default">
+                <header class="panel-heading">注册</header>
+                <div class="bg-white user pd-md">
+                    <strong>Welcome.</strong>注册使用TipGo餐厅打赏系统</h6>
+                    <form role="form" autocomplete="on">
+                        <input type="text"  name="userid" class="form-control mg-b-sm" placeholder="请输入账号" autofocus>
+                        <input type="text"  name="restaurantname" class="form-control mg-b-sm" placeholder="餐厅名称">
+                        <input type="password"  name="password" class="form-control mg-b-sm" placeholder="请输入密码">
+                        <input type="password"  name="passwordconfirm" class="form-control mg-b-sm" placeholder="再次请输入密码">
+
+                        <button class="btn btn-info btn-block" type="submit" onclick="sign(event,userid,restaurantname,password,passwordconfirm)">注册</button>
+                    </form>
+
+
+
+                    <p class="center-block mg-t mg-b text-right">已有账号?
+                        <a href="login.html">点击登录.</a>
+                    </p>
+
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel1">注册失败,请重新输入</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel2">注册成功</h4>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location.href='index.html'">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
