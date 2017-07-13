@@ -35,7 +35,7 @@
     <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 
     <script>
-        function addwaiter(e,waiterid,waitername) {
+        function addwaiter(e,waitername) {
             e.preventDefault();
             waitername=waitername.value;
             var token=localStorage.getItem("token");
@@ -90,10 +90,9 @@
                 <div class="bg-white user pd-md">
 
                     <form role="form" autocomplete="on">
-                        <input type="text" id="waiterid" name="waiterid" class="form-control mg-b-sm" placeholder="员工编号" autofocus>
-                        <input type="text" id="waitername" name="waitername" class="form-control" placeholder="员工姓名">
+                        <input type="text" id="waitername" name="waitername" class="form-control mg-b-sm" placeholder="员工姓名" autofocus>
 
-                        <button class="btn btn-info btn-block" type="submit" onclick="addwaiter(event,waiterid,waitername)">添加</button>
+                        <button class="btn btn-info btn-block" type="submit" onclick="addwaiter(event,waitername)">添加</button>
                     </form>
 
 

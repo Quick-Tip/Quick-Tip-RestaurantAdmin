@@ -2260,6 +2260,7 @@ fieldset[disabled] .btn-danger.active {
 }
 .label {
     line-height: inherit;
+    margin-right: 5px;
 }
 .label-default {
     background-color: #dde1e7;
