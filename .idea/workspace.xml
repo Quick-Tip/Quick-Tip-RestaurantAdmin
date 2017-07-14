@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1a737e6-c76e-4ac1-9c94-d987bdf556f5" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/about.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/avatar.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/cover.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/face1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/face3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/face4.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/face5.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/invoice.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/profile-cover.jpg" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/datepicker.html" afterPath="$PROJECT_DIR$/datepicker.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/waiterinfo.html" afterPath="$PROJECT_DIR$/waiterinfo.html" />
     </list>
     <ignored path="TipGo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AllTips.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AllTips.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AllTips.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="185" column="34" selection-start-line="185" selection-start-column="34" selection-end-line="185" selection-end-column="34" />
+            <state relative-caret-position="330">
+              <caret line="139" column="36" selection-start-line="139" selection-start-column="36" selection-end-line="139" selection-end-column="40" />
               <folding>
                 <element signature="e#17920#17927#0" expanded="true" />
                 <element signature="e#18651#18658#0" expanded="true" />
@@ -43,6 +37,38 @@
                 <marker date="1499932632000" expanded="true" signature="7306:8890" ph="..." />
                 <marker date="1499932632000" expanded="true" signature="7482:8890" ph="..." />
                 <marker date="1499932632000" expanded="true" signature="8658:8890" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="131" column="63" selection-start-line="131" selection-start-column="63" selection-end-line="131" selection-end-column="63" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="datepicker.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/datepicker.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="waiterinfo.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/waiterinfo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="84" column="21" selection-start-line="84" selection-start-column="21" selection-end-line="84" selection-end-column="21" />
+              <folding>
+                <element signature="e#17260#17267#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -79,13 +105,13 @@
         <option value="$PROJECT_DIR$/login.html" />
         <option value="$PROJECT_DIR$/signup.html" />
         <option value="$PROJECT_DIR$/addtable.html" />
-        <option value="$PROJECT_DIR$/datepicker.html" />
         <option value="$PROJECT_DIR$/TableManager.html" />
-        <option value="$PROJECT_DIR$/waiterinfo.html" />
         <option value="$PROJECT_DIR$/addwaiter.html" />
         <option value="$PROJECT_DIR$/css/main.css" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/AllTips.html" />
+        <option value="$PROJECT_DIR$/datepicker.html" />
+        <option value="$PROJECT_DIR$/waiterinfo.html" />
       </list>
     </option>
   </component>
@@ -100,8 +126,9 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
+    <option name="y" value="12" />
     <option name="width" value="1280" />
-    <option name="height" value="800" />
+    <option name="height" value="777" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -129,7 +156,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -164,6 +190,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -250,16 +277,17 @@
       <workItem from="1499685691513" duration="1832000" />
       <workItem from="1499734389710" duration="16724000" />
       <workItem from="1499820895199" duration="6861000" />
-      <workItem from="1499931667469" duration="1383000" />
+      <workItem from="1499931667469" duration="1462000" />
+      <workItem from="1500003334674" duration="454000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101291000" />
+    <option name="totallyTimeSpent" value="101824000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="800" extended-state="6" />
-    <editor active="false" />
+    <frame x="0" y="12" width="1280" height="777" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23984376" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -315,14 +343,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/datatest.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/datatest.html" />
     <entry file="file://$PROJECT_DIR$/datepicker.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
@@ -364,9 +385,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1290">
           <caret line="86" column="49" selection-start-line="86" selection-start-column="49" selection-end-line="86" selection-end-column="49" />
-          <folding>
-            <element signature="e#4334#4341#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -390,26 +408,13 @@
         <state relative-caret-position="1065">
           <caret line="71" column="66" selection-start-line="71" selection-start-column="66" selection-end-line="71" selection-end-column="66" />
           <folding>
-            <element signature="e#17112#17119#0" expanded="true" />
+            <element signature="e#17260#17267#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="48" column="18" selection-start-line="40" selection-start-column="12" selection-end-line="48" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datatest.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test.html" />
+    <entry file="file://$PROJECT_DIR$/datatest.html" />
     <entry file="file://$PROJECT_DIR$/datepicker.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
@@ -512,13 +517,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test.html" />
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/phpstorm.jar!/resources/html5-schema/html5/phrase.rnc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
@@ -542,21 +541,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/datepicker.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="e#4334#4341#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -564,17 +552,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2685">
           <caret line="179" column="29" selection-start-line="179" selection-start-column="29" selection-end-line="179" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/waiterinfo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="249" column="9" selection-start-line="249" selection-start-column="9" selection-end-line="249" selection-end-column="9" />
-          <folding>
-            <element signature="e#17112#17119#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -582,9 +559,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
-          <folding>
-            <element signature="e#3994#4001#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -592,27 +566,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1365">
           <caret line="91" column="56" selection-start-line="91" selection-start-column="56" selection-end-line="91" selection-end-column="56" />
-          <folding>
-            <element signature="e#3854#3861#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/datatest.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/datatest.html" />
     <entry file="file://$PROJECT_DIR$/signup.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1590">
           <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding>
-            <element signature="e#5096#5103#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -620,22 +581,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
           <caret line="4640" column="1" selection-start-line="4640" selection-start-column="1" selection-end-line="4640" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="131" column="63" selection-start-line="131" selection-start-column="63" selection-end-line="131" selection-end-column="63" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/img/about.png" />
+    <entry file="file://$PROJECT_DIR$/img/avatar.jpg" />
+    <entry file="file://$PROJECT_DIR$/img/cover.jpg" />
+    <entry file="file://$PROJECT_DIR$/img/face1.jpg" />
+    <entry file="file://$PROJECT_DIR$/img/face3.jpg" />
+    <entry file="file://$PROJECT_DIR$/img/face4.jpg" />
+    <entry file="file://$PROJECT_DIR$/img/face5.jpg" />
+    <entry file="file://$PROJECT_DIR$/img/invoice.png" />
+    <entry file="file://$PROJECT_DIR$/img/restaurant.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/img/profile-cover.jpg" />
     <entry file="file://$PROJECT_DIR$/AllTips.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="185" column="34" selection-start-line="185" selection-start-column="34" selection-end-line="185" selection-end-column="34" />
+        <state relative-caret-position="330">
+          <caret line="139" column="36" selection-start-line="139" selection-start-column="36" selection-end-line="139" selection-end-column="40" />
           <folding>
             <element signature="e#17920#17927#0" expanded="true" />
             <element signature="e#18651#18658#0" expanded="true" />
@@ -647,54 +613,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/img/about.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="131" column="63" selection-start-line="131" selection-start-column="63" selection-end-line="131" selection-end-column="63" />
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/img/avatar.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/datepicker.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/img/cover.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img/face1.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img/face3.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img/face4.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img/face5.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img/invoice.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img/restaurant.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img/profile-cover.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/waiterinfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="84" column="21" selection-start-line="84" selection-start-column="21" selection-end-line="84" selection-end-column="21" />
+          <folding>
+            <element signature="e#17260#17267#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>
